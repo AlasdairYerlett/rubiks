@@ -43,17 +43,18 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     perspective: 2000px;
-    transform: scale(0.6);
+    transform: scale(0.5);
     transition: 0.5s;
 }
 
 /* Y axis rotation */
 #gimbal {
-  transform: rotateX(335deg) rotateY(315deg) rotatez(0deg);
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-  height: 100px;
-  width: 100px;
+    transform: rotateX(335deg) rotateY(315deg) rotatez(0deg);
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    height: 100px;
+    width: 100px;
+/*    animation: rotate-animation 60s ease-out normal;*/
 }
 
 @keyframes rotate-animation {
@@ -68,62 +69,6 @@ body {
   transform-style: preserve-3d;
   height: 100px;
   width: 100px;
-}
-
-.verticalcross {
-  position: fixed;
-  transform: rotateZ(0deg) translate3d(0%, 0%, 0px);
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-}
-
-.horizontalcross {
-  position: fixed;
-  transform: rotateY(0deg) translate3d(0%, 0%, 0px);
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-}
-
-.aaface {
-  position: fixed;
-  transform: rotateZ(0deg);
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-}
-
-.bbface {
-  position: fixed;
-  transform: rotateY(0deg) translate3d(0%, 0%, 0px);
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-}
-
-.ccface {
-  position: fixed;
-  transform: rotateX(0deg) translate3d(0%, 0%, 0px);
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-}
-
-.ddface {
-  position: fixed;
-  transform: rotateX(0deg) translate3d(0%, 0%, 0px);
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-}
-
-.eeface {
-  position: fixed;
-  transform: rotateY(0deg) translate3d(0%, 0%, 0px);
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-}
-
-.ffface {
-  position: fixed;
-  transform: rotateZ(0deg) translate3d(0%, 0%, 0px);
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
 }
 
 .cube .aa {
@@ -174,24 +119,50 @@ body {
   width: 100px;
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
+  opacity: 1;
+}
+
+#large-circle {
+    position: relative;
+    height: 100px;
+    width: 100px;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    transform: translateY(0px) rotateY(0deg) rotateX(0deg);
+}
+
+.vertical {
+    /* Sphere ring */
+    /* White */
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    position: absolute;
+    display: inline-block;
+    border-radius: 800px;
+    height: 200px;
+    width: 200px;
+    border: 1px white solid;
+    opacity: 0.8;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
 }
 
 /* Cube Heart*/
 #middle {
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-  position:fixed;
-  animation-direction: normal;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    position:fixed;
+    animation-direction: normal;
 }
 
 /* Center Pieces */
 #five, #eleven, #thirteen, #fourteen, #sixteen, #twentytwo {
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-  position:fixed;
-  animation-direction: normal;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    position:fixed;
+    animation-direction: normal;
+    opacity:1;
 }
-
 
 /* Shoulder Pieces*/
 #two, #four, #six, #eight, #ten, #twelve, #fifteen, #seventeen, #nineteen, #twentyone, #twentythree, #twentyfive {
@@ -199,15 +170,16 @@ body {
   transform-style: preserve-3d;
   position:fixed;
   animation-direction: normal;
+    opacity:1;
 }
-
 
 /* Corner Pieces */
  #one, #three, #seven, #nine, #eighteen, #twenty, #twentyfour, #twentysix {
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-  position:fixed;
-  animation-direction: normal;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    position:fixed;
+    animation-direction: normal;
+     opacity:1;
  }
 
 .face {
@@ -241,27 +213,22 @@ body {
 
 .front {
   transform: translateZ(50px) rotateY(0deg);
-/*  border-radius: 15px;*/
 }
 
 .back {
   transform: translateZ(-50px) rotateY(180deg);
-/*  border-radius: 15px;*/
 }
 
 .left {
   transform: translateX(-50px) rotateY(-90deg);
-/*  border-radius: 15px;*/
 }
 
 .right {
   transform: translateX(50px) rotateY(90deg);
-/*  border-radius: 15px;*/
 }
 
 .top {
   transform: translateY(-50px) rotateY(0deg) rotateX(90deg);
-/*  border-radius: 15px;*/
 }
 
 .bottom {
@@ -269,6 +236,7 @@ body {
 /*  border-radius: 15px;*/
 }
 
+/* Following section is for intro animation */
 #one {
     transform: translate3d(-100%, -100%, 100px);
 }
