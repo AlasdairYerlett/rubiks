@@ -59,7 +59,7 @@ body {
 
 @keyframes rotate-animation {
     from {transform: rotateX(335deg) rotateY(315deg) rotatez(0deg);}
-    to {transform: rotateX(335deg) rotateY(1035deg) rotatez(0deg);}
+    to {transform: rotateX(1415deg) rotateY(1395deg) rotatez(0deg);}
 }    
 
 /* X axis & Z axis rotations */
@@ -128,7 +128,13 @@ body {
     width: 100px;
     -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
-    transform: translateY(0px) rotateY(0deg) rotateX(0deg);
+    transform: translateY(0px) rotateY(0deg) rotateX(0deg) scale3d(1, 1, 1);
+}
+
+@keyframes circleGrowth {
+    0% {transform: translateY(0px) translateX(0px) scale3d(1, 1, 1);}
+    50% {transform: translateY(-50px) translateX(-50px) scale3d(2, 2, 2);}
+    100% {transform: translateY(0px) translateX(0px) scale3d(1, 1, 1);}
 }
 
 .vertical {
@@ -179,25 +185,32 @@ body {
     transform-style: preserve-3d;
     position:fixed;
     animation-direction: normal;
-     opacity:1;
  }
 
 .face {
-  background-color: black;
+    background-color: black;
 }
 
 .face, .sticker {
-  width: 100px;
-  height: 100px;
-  border: 5px solid black;
-  position: absolute;
-  opacity: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: Arial, sans-serif;
-  font-size: 2rem;
+    width: 100px;
+    height: 100px;
+    border: 5px solid black;
+    position: absolute;
+    opacity: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    font-size: 2rem;
+    transition: 0.5s;
 }
+
+/* Animate each cube (cubes are offset on animation) */
+@keyframes glow {
+    0% {opacity: 1;}
+    90% {opacity: 0.2;}
+    100% {opacity: 1;}
+} 
 
 .ident {
   width: 100px;
@@ -406,7 +419,7 @@ body {
 @keyframes rotate-nineteen {
     1% {transform: translate3d(0%, -300%, -300px);}
     20% {transform: translate3d(0%, -100%, -100px);}
-} 
+}
 
 #twenty {
     transform: translate3d(100%, -100%, -100px);

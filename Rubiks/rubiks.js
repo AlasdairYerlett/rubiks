@@ -173,7 +173,11 @@ var key = [
     ["cw", "z", cube_axes[2], 0, true]
 ];
 
-
+var piece_groups = [
+    ['five', 'eleven', 'thirteen', 'fourteen', 'sixteen', 'twentytwo'], //middle pieces               
+    ['two', 'four', 'six', 'eight', 'ten', 'twelve', 'fifteen', 'seventeen', 'nineteen', 'twentyone', 'twentythree', 'twentyfive'], //side pieces
+    ['one', 'three', 'seven', 'nine', 'eighteen', 'twenty', 'twentyfour', 'twentysix']                   
+];
 // // console.log("cube rotation at initial", cube_rotation);
 // // console.log("rotation_map at initial", rotation_map);
 //            console.log("cube map at initial", cube_map);
@@ -185,13 +189,13 @@ document.addEventListener('keydown', (event) => {
    keysPressed[event.key] = true;
 
     if (keysPressed['Shift'] && event.key == 'ArrowRight') {
-        key_number = 14;
-        key_check();
+//        key_number = 14;
+        key_check(14);
     }
 
     if (keysPressed['Shift'] && event.key == 'ArrowLeft') {
-        key_number = 15;
-        key_check();
+//        key_number = 15;
+        key_check(15);
     }
 
     if (keysPressed['Shift'] && event.key == 'ArrowUp') {
@@ -241,59 +245,48 @@ document.addEventListener('keydown', (event) => {
     if ((angleX == 0 || angleX == 90 || angleX == 180 || angleX == 270) &&
         (angleY == 0 || angleY == 90 || angleY == 180 || angleY == 270)) {
         if (keysPressed['s'] && event.key == 'ArrowRight') {
-            key_number = 8;
-            key_check();
+            key_check(8);
         }
         if (keysPressed['s'] && event.key == 'ArrowLeft') {
-            key_number = 9;
-            key_check();
+            key_check(9);
         }
+        
         if (keysPressed['s'] && event.key == 'ArrowUp') {
-            key_number = 12;
-            key_check();
+            key_check(12);
         }
         if (keysPressed['s'] && event.key == 'ArrowDown') {
-            key_number = 13;
-            key_check();
+            key_check(13);
         }
+        
         if (keysPressed['x'] && event.key == 'ArrowRight') {
-            key_number = 10;
-            key_check();
+            key_check(10);
         }
         if (keysPressed['x'] && event.key == 'ArrowLeft') {
-            key_number = 11;
-            key_check();
+            key_check(11);
         }
     }
 
     if ((angleY == 0 || angleY == 90 || angleY == 180 || angleY == 270) &&
         (angleZ == 0 || angleZ == 90 || angleZ == 180 || angleZ == 270)) {
         if (keysPressed['d'] && event.key == 'ArrowRight') {
-            key_number = 0;
-            key_check();
+            key_check(0);
         }
-
         if (keysPressed['d'] && event.key == 'ArrowLeft') {
-            key_number = 1;
-            key_check();
+            key_check(1);
         }
 
         if (keysPressed['d'] && event.key == 'ArrowUp') {
-            key_number = 16;
-            key_check();
+            key_check(16);
         }
         if (keysPressed['d'] && event.key == 'ArrowDown') {
-            key_number = 17;
-            key_check();
+            key_check(17);
         }
 
         if (keysPressed['a'] && event.key == 'ArrowRight') {
-            key_number = 2;
-            key_check();
+            key_check(2);
         }
         if (keysPressed['a'] && event.key == 'ArrowLeft') {
-            key_number = 3;
-            key_check();
+            key_check(3);
         }
 
     }
@@ -301,20 +294,17 @@ document.addEventListener('keydown', (event) => {
     if ((angleX == 0 || angleX == 90 || angleX == 180 || angleX == 270) &&
         (angleZ == 0 || angleZ == 90 || angleZ == 180 || angleZ == 270)) {
         if (keysPressed['w'] && event.key == 'ArrowRight') {
-            key_number = 4;
-            key_check();
+            key_check(4);
         }
         if (keysPressed['w'] && event.key == 'ArrowLeft') {
-            key_number = 5;
-            key_check();
+            key_check(5);
         }
+        
         if (keysPressed['z'] && event.key == 'ArrowRight') {
-            key_number = 6;
-            key_check();
+            key_check(6);
         }
         if (keysPressed['z'] && event.key == 'ArrowLeft') {
-            key_number = 7;
-            key_check();
+            key_check(7);
         }
     }
 });
@@ -328,44 +318,150 @@ function play_button(i) {
     vertical = document.createElement('div');
     vertical.setAttribute("id", 'vertical');
     document.getElementById("large-circle").appendChild(vertical);
-    for (let i = 0; i < 360;) {
-        name = 'v-' + i;
-        circle = document.createElement('div');
-        circle.setAttribute("id", name);
-        document.getElementById("large-circle").appendChild(circle);
-        document.getElementById(name).style.backgroundColor = 'transparent';
-        document.getElementById(name).style.borderRadius = '800px';
-        document.getElementById(name).style.height = '200px';
-        document.getElementById(name).style.width = '200px';
-        document.getElementById(name).style.border = '1px white solid';
-        document.getElementById(name).style.opacity = '0.8';
-        document.getElementById(name).style.webkitTransformStyle = 'preserve-3d';
-        document.getElementById(name).style.transformStyle = 'preserve-3d';
-        document.getElementById(name).style.position = 'absolute';
-        document.getElementById(name).style.display = 'inline-block';
-        document.getElementById(name).style.transform = 'translateY(0px) rotateY(' + i + 'deg)';
-        i = i + 10;
+    document.getElementById("large-circle").style.animation = 'circleGrowth 11s ease-out 4s normal';
+    for (let axis = 0; axis < 3; axis++) {
+        for (let i = 0; i < 360;) {
+            name = 'v-' + axis + '-' + i;
+            circle = document.createElement('div');
+            circle.setAttribute("id", name);
+            document.getElementById("large-circle").appendChild(circle);
+            document.getElementById(name).style.backgroundColor = 'transparent';
+            document.getElementById(name).style.borderRadius = '800px';
+            document.getElementById(name).style.height = '200px';
+            document.getElementById(name).style.width = '200px';
+            document.getElementById(name).style.border = '1px white solid';
+            document.getElementById(name).style.opacity = '0.8';
+            document.getElementById(name).style.webkitTransformStyle = 'preserve-3d';
+            document.getElementById(name).style.transformStyle = 'preserve-3d';
+            document.getElementById(name).style.position = 'absolute';
+            document.getElementById(name).style.display = 'inline-block';
+            if (axis == 0)
+                {
+                    document.getElementById(name).style.transform = 'translateY(0px) rotateX(' + i + 'deg) scale3d(1, 1, 1)';
+                }
+            if (axis == 1)
+                {
+                    document.getElementById(name).style.transform = 'translateY(0px) rotateY(' + i + 'deg) scale3d(1, 1, 1)';
+                }
+            if (axis == 2)
+                {
+                    document.getElementById(name).style.transform = 'translateY(0px) rotateX(90deg) rotatey(' + i + 'deg) scale3d(1, 1, 1)';
+                }
+            i = i + 30;
+        }
     }
     // Hide play symbol
     document.getElementById(i).style.opacity = 0;
     // Reposition cube to middle of screen, making visible and start animation
     document.getElementById('container').style.position = 'relative';
     document.getElementById('container').style.opacity = 0.9;
-    document.getElementById('gimbal').style.animation = 'rotate-animation 15s ease-out normal'; 
+    document.getElementById('gimbal').style.animation = 'rotate-animation 15s ease-out normal';
+    var delay = 5;
     for (let i = 0; i < cube_map.length; i++) {
         // Start animation for each cube in 'explosion'
-        document.getElementById(cube_map[i][0]).style.animation = 'rotate-' + cube_map[i][0] + ' 60s ease-out normal';
+        document.getElementById(cube_map[i][0]).style.animation = 'rotate-' + cube_map[i][0] + ' 60s ease-out ' + delay + 's normal';
+        delay = 4 + (i*0.1);
+        console.log('i: ', i, 'delay: ', delay)
     }  
+    
+    function cubeGlow (inputMap, timeOpacity, delayMultiplier, isIntro) {
+        // Alternate cube glow during 'explosion'
+        var colors = ['aa', 'bb', 'cc', 'dd', 'ee', 'ff']
+        if (isIntro) {
+            for (let i = 0; i < inputMap.length; i++) {
+                for (let k = 0; k < colors.length; k++) {
+                    if (document.getElementById(inputMap[i][0]).getElementsByClassName(colors[k])[0]) {
+                        document.getElementById(inputMap[i][0]).getElementsByClassName(colors[k])[0].style.animation = 'glow ' + timeOpacity + 's ease-out ' + delay + 's normal';
+                    }
+                }
+                delay = i * delayMultiplier;
+            }
+        }
+        if(!isIntro) {
+            // Define opacity of all cubes, takes number 0 to 1 as string
+            function blackOut (timeOpacity) {
+                for (let i = 0; i < cube_map.length; i++) {
+                    for (let k = 0; k < colors.length; k++) {
+                        if (document.getElementById(cube_map[i][0]).getElementsByClassName(colors[k])[0]) {
+                            document.getElementById(cube_map[i][0]).getElementsByClassName(colors[k])[0].style.opacity = timeOpacity;
+                        }
+                    }
+                }
+            }
+
+            // Highlight all cubes in set (center, side, or corner)
+            function animateHighlight (n) {
+                for (let i = 0; i < inputMap[n].length; i++) {
+                    for (let k = 0; k < colors.length; k++) {
+                        if (document.getElementById(inputMap[n][i]).getElementsByClassName(colors[k])[0]) {
+                            document.getElementById(inputMap[n][i]).getElementsByClassName(colors[k])[0].style.opacity = '1';
+                        }
+                    }
+                }
+            }
+            for (let n = 0; n < 3; n++) {
+                setTimeout(function() {
+                    // Blackout all cubes
+                    setTimeout(function() {
+                        blackOut(timeOpacity)
+                    }, 500 + (n * delayMultiplier));
+                    // Then highlight only cubes in set(n)
+                    setTimeout(function() {
+                        animateHighlight (n)
+                    }, 1000 + (n * delayMultiplier));
+                }, 19000 + (n * 6));
+            }
+            
+            // Highlight all cubes at end of animation
+            setTimeout(function() {
+                blackOut('1')
+            }, 50000);  
+        }
+    }
+    
+    cubeGlow(cube_map, 2.5, 0.2, true)
+    cubeGlow(piece_groups, '0.3', 10000, false)
+
+     
     // After animation has run, remove animation to allow user input without errors
     setTimeout(function() {
         for (let i = 0; i < cube_map.length; i++) {
             document.getElementById(cube_map[i][0]).style.animation = null;
         }
         document.getElementById('gimbal').style.animation = null; 
-    }, 30000);     
+    }, 18000);     
+    
+
+    
+    setTimeout(function() {
+        
+        // Animation roation sequence [F-CW, R-CW, U-CW, F-CW, F-CCW, U-CCW, R-CCW, F-CCW]
+        var animate_rotate = [8, 0, 4, 8, 9, 5, 1, 9]
+        
+        // Rotates sides by rotation number
+        function animationRotations(k) {
+            setTimeout(function() {
+                key_check(animate_rotate[k]);
+                console.log('k', k)
+            }, (i + 1)*400);
+        }
+        
+        // Work through rotation sequence 3 times to demo piece rotations
+        for (let n = 0; n < 3; n++) {
+            setTimeout(function() {
+                console.log('n', n)
+                for (let k = 0; k < animate_rotate.length; k++) {
+                    setTimeout(function() {
+                        animationRotations(k)
+                        console.log('k', k)
+                    }, (k)*1200);
+                }
+            }, (animate_rotate.length * n)*1200 + 2000);
+        }
+    }, 19000);
 }
 
-function key_check() {
+function key_check(key_number) {
     // Already pressed don't allow another press for 0.3s, to block rapid repition of function causing error
     if (pressed === true) {
         return false;
